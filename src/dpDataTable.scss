@@ -7,7 +7,7 @@
   }
   table thead {
     th.action {
-      width: 10%;
+      width: 2%;
     }
     &.c3 th:not(.action) {
       width: 20%;
@@ -34,6 +34,7 @@
   .action-buttons a {
     margin: 0 .5rem;
     cursor: pointer;
+    color: black;
   }
 
   @keyframes fa-spin {

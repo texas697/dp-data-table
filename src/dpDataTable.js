@@ -33,7 +33,6 @@ class DpDataTable extends Component {
       sortableFields: PropTypes.array,
       defaultSort: PropTypes.string,
       id: PropTypes.string,
-      onEditing: PropTypes.func,
       onDeleting: PropTypes.func,
       itemsPerPage: PropTypes.number,
       showFilter: PropTypes.bool,
@@ -73,7 +72,7 @@ class DpDataTable extends Component {
     const icons = extend({ 'LOADING': 'fa fa-refresh' }, iconClasses);
     return (
       <div className="row data-table-component" data-toggle="table">
-        {isLoading && (<div className="isLoading-container"><i className={icons.LOADING}></i></div>)}
+        {isLoading && (<div className="isLoading-container"><i className={icons.LOADING} /></div>)}
         {!isLoading && showFilter && this._renderFilter()}
         {!isLoading && !hidePagination && this._renderHeaderPagination(filteredItems)}
         {!isLoading && (<div className="table-responsive col-xs-12" style={{ height: tableHeight ? tableHeight : '225px' }}>
@@ -111,39 +110,31 @@ class DpDataTable extends Component {
               <th key={'header-' + kebabCase(headerKey)} data-sortable={isSortable} data-sort-key={headerKey}
                 data-sort-order={solSortOrder} onClick={() => this._onSortChange(headerKey, isSortable)}>
                 {header}
-                {isSortable && (<i className={classNames('pull-right', sortClasses['SORT_' + solSortOrder])}></i>)}
+                {isSortable && (<i className={classNames('pull-right', sortClasses['SORT_' + solSortOrder])} />)}
               </th>
             );
           })}
-          {showActionCol && (<th className="action"></th>)}
+          {showActionCol && (<th className="action" />)}
         </tr>
       </thead>
     );
   }
 
   _renderRow(filteredItems) {
-    const { headers, onEditing, itemsPerPage = this.DEFAULT_PAGE_ITEM_COUNT, hidePagination, onDeleting, iconClasses, items, showActionCol } = this.props;
+    const { headers, itemsPerPage = this.DEFAULT_PAGE_ITEM_COUNT, hidePagination, onDeleting, iconClasses, items, showActionCol } = this.props;
     const currentPage = !hidePagination ? this.state.currentPage : 0;
     const pagedItems = !hidePagination ? chunk(filteredItems, itemsPerPage) : [filteredItems];
     const icons = extend({
-      'DELETE': 'fa fa-trash',
-      'EDIT': 'fa fa-pencil',
-      'POPOVER_VIEW': 'fa fa-search'
+      'DELETE': 'fa fa-times-circle'
     }, iconClasses);
     const itemHeaders = size(headers) > 0 ? keys(headers) : keys(items[0]);
     return map(pagedItems[currentPage], (item, index) => {
-      const { popover } = item;
       return (
-        <tr key={index} onClick={() => this.props.onRowClick(item)} style={{ cursor: 'pointer' }}>
-          {map(itemHeaders, (header) => <td key={'item-' + index + '-' + kebabCase(header)}>{item[header]}</td>)}
+        <tr key={index} style={{ cursor: 'pointer' }}>
+          {map(itemHeaders, (header) => <td onClick={() => this.props.onRowClick(item)} key={'item-' + index + '-' + kebabCase(header)}>{item[header]}</td>)}
           {showActionCol && (
             <td className="action-buttons">
-              {onEditing && <a onClick={() => this._onEditing(item, index)}><i className={icons.EDIT} /></a>}
               {onDeleting && <a onClick={() => this._onDeleting(item, index)}><i className={icons.DELETE} /></a>}
-              {popover && <a data-toggle="popover" data-trigger="hover"
-                data-placement="left" data-html="true" data-content={popover}>
-                <i className={icons.POPOVER_VIEW} />
-              </a>}
             </td>
           )}
         </tr>
