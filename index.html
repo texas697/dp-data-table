@@ -28,6 +28,9 @@
   function onDelete(e) {
     alert("Delete item " + e.index + " whose value is \n" + JSON.stringify(e.item, undefined, 2))
   }
+  function onRowClick(e) {
+    console.log(e)
+  }
   function onItemsChange(e) {
     console.info(e.changeReason);
   }
@@ -43,6 +46,7 @@
     showSort: true,
     onEditing: onEdit,
     onDeleting: onDelete,
+    onRowClick: onRowClick,
     onItemsChange: onItemsChange
   });
 </script>

@@ -32,6 +32,7 @@ class DpDataTable extends Component {
       filterableFields: PropTypes.array,
       sortableFields: PropTypes.array,
       defaultSort: PropTypes.string,
+      defaultSortOrder: PropTypes.string,
       id: PropTypes.string,
       onDeleting: PropTypes.func,
       itemsPerPage: PropTypes.number,
@@ -61,7 +62,7 @@ class DpDataTable extends Component {
       currentPage: 0,
       filter: '',
       sortKey: props.showSort ? (props.defaultSort ? props.defaultSort : headerKeys[0]) : '',
-      sortOrder: props.showSort ? 'ASC' : 'NONE',
+      sortOrder: props.showSort && props.defaultSortOrder !== 'DESC' ? 'ASC' : 'DESC',
       changeReason: 'INITIALIZED'
     };
   }
