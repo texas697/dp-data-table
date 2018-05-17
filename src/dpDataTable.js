@@ -97,6 +97,7 @@ class DpDataTable extends Component {
       'SORT_DESC': 'fa fa-sort-desc'
     }, iconClasses);
     const { sortKey, sortOrder } = this.state;
+    console.log(sortOrder)
     const itemHeaders = size(headers) > 0 ? headers : keys(items[0]);
     return (
       <thead className={'c' + size(headers)}>
@@ -107,6 +108,7 @@ class DpDataTable extends Component {
             }
             const isSortable = showSort && (size(sortableFields) === 0 || includes(sortableFields, headerKey));
             const solSortOrder = headerKey === sortKey ? sortOrder : 'NONE';
+            console.log(solSortOrder)
             return (
               <th key={'header-' + kebabCase(headerKey)} data-sortable={isSortable} data-sort-key={headerKey}
                 data-sort-order={solSortOrder} onClick={() => this._onSortChange(headerKey, isSortable)}>
