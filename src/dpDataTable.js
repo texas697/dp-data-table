@@ -81,7 +81,7 @@ class DpDataTable extends Component {
             {this._renderHeader()}
             <tbody>
               {this._renderRow(filteredItems)}
-              {totalRow && <totalRow />}
+              {totalRow}
             </tbody>
           </table>
         </div>)}
