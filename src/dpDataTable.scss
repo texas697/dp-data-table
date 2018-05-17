@@ -5,7 +5,11 @@
       cursor: pointer;
     }
   }
-
+  .audit-summary-total-row {
+    background-color: white;
+    border-top: 2px solid black;
+    font-weight: bold;
+  }
   table thead {
     th.action {
       width: 2%;
