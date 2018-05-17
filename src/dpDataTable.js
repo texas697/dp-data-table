@@ -47,6 +47,7 @@ class DpDataTable extends Component {
       tableClass: PropTypes.string,
       isLoading: PropTypes.bool,
       iconClasses: PropTypes.object,
+      totalRow: PropTypes.node,
       onSorting: PropTypes.func,
       onFiltering: PropTypes.func,
       onItemsChange: PropTypes.func,
@@ -67,7 +68,7 @@ class DpDataTable extends Component {
   }
 
   render() {
-    const { hidePagination, showFooterPagination, showFilter, isLoading, iconClasses, tableHeight, tableClass, id } = this.props;
+    const { hidePagination, showFooterPagination, showFilter, isLoading, iconClasses, tableHeight, tableClass, id, totalRow } = this.props;
     const filteredItems = this._filterItems();
     const icons = extend({ 'LOADING': 'fa fa-refresh' }, iconClasses);
     return (
@@ -80,6 +81,7 @@ class DpDataTable extends Component {
             {this._renderHeader()}
             <tbody>
               {this._renderRow(filteredItems)}
+              {totalRow && <totalRow />}
             </tbody>
           </table>
         </div>)}
