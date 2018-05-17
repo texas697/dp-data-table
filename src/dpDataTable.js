@@ -32,7 +32,6 @@ class DpDataTable extends Component {
       filterableFields: PropTypes.array,
       sortableFields: PropTypes.array,
       defaultSort: PropTypes.string,
-      defaultSortOrder: PropTypes.string,
       id: PropTypes.string,
       onDeleting: PropTypes.func,
       itemsPerPage: PropTypes.number,
@@ -62,7 +61,7 @@ class DpDataTable extends Component {
       currentPage: 0,
       filter: '',
       sortKey: props.showSort ? (props.defaultSort ? props.defaultSort : headerKeys[0]) : '',
-      sortOrder: props.showSort ? (props.defaultSortOrder ? props.defaultSortOrder : 'ASC') : 'NONE',
+      sortOrder: props.showSort ? 'ASC' : 'NONE',
       changeReason: 'INITIALIZED'
     };
   }
@@ -247,14 +246,6 @@ class DpDataTable extends Component {
   _onPageClick(page) {
     if (page !== undefined) {
       this.setState({ currentPage: page, changeReason: 'PAGE_CHANGED' });
-    }
-  }
-
-  _onEditing(item, index) {
-    const { onEditing } = this.props;
-    this._onItemsChange({ changeReason: 'ROW_EDITING', index, item });
-    if (isFunction(onEditing)) {
-      onEditing({ item, index });
     }
   }
 
