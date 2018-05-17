@@ -62,7 +62,7 @@ class DpDataTable extends Component {
       currentPage: 0,
       filter: '',
       sortKey: props.showSort ? (props.defaultSort ? props.defaultSort : headerKeys[0]) : '',
-      sortOrder: props.showSort && props.defaultSortOrder !== 'DESC' ? 'ASC' : 'DESC',
+      sortOrder: props.showSort ? (props.defaultSortOrder ? props.defaultSortOrder : 'ASC') : 'NONE',
       changeReason: 'INITIALIZED'
     };
   }
