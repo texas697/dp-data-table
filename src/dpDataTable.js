@@ -115,9 +115,7 @@ class DpDataTable extends Component {
           {map(itemHeaders, (header, headerKey) => {
             if (isNumber(headerKey)) {
               headerKey = header;
-              console.log(headerKey)
             }
-            console.log(headerKey)
             const isSortable = showSort && (size(sortableFields) === 0 || includes(sortableFields, headerKey));
             const solSortOrder = headerKey === sortKey ? sortOrder : 'NONE';
             return (
@@ -179,15 +177,22 @@ class DpDataTable extends Component {
     const filterKeys = (filterableFields && filterableFields.length) ? filterableFields : headerKeys;
     let processedItems = items;
     if (filterString !== '') {
-      if (isFunction(onFiltering)) {
-        processedItems = onFiltering({ items: processedItems, filterString });
-      } else {
-        processedItems = filter(items, (item) => {
-          return some(filterKeys, (filterKey) => {
-            return item && item[filterKey] && startsWith(toLower(toString(item[filterKey])), toLower(filterString));
-          });
+      // if (isFunction(onFiltering)) {
+      //   processedItems = onFiltering({ items: processedItems, filterString });
+      // } else {
+      //   processedItems = filter(items, (item) => {
+      //     return some(filterKeys, (filterKey) => {
+      //       return item && item[filterKey] && startsWith(toLower(toString(item[filterKey])), toLower(filterString));
+      //     });
+      //   });
+      //   onFiltering({ items: processedItems, filterString })
+      // }
+      processedItems = filter(items, (item) => {
+        return some(filterKeys, (filterKey) => {
+          return item && item[filterKey] && startsWith(toLower(toString(item[filterKey])), toLower(filterString));
         });
-      }
+      });
+      onFiltering({ items: processedItems, filterString })
     }
     if (sortKey !== '') {
       if (isFunction(onSorting)) {
