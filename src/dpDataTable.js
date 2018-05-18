@@ -88,6 +88,7 @@ class DpDataTable extends Component {
                   <td>{auditSummaryTotalRow.notStarted}</td>
                   <td>{auditSummaryTotalRow.inProgress}</td>
                   <td>{auditSummaryTotalRow.unable}</td>
+                  <td>{auditSummaryTotalRow.review}</td>
                   <td>{auditSummaryTotalRow.research}</td>
                   <td>{auditSummaryTotalRow.approved}</td>
                 </tr>
